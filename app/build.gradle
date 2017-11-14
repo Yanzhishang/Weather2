@@ -52,6 +52,9 @@ dependencies {
     // (v1.0.0)
     compile 'com.joanzapata.iconify:android-iconify-ionicons:2.2.2'
     // (v2.0.1)
-
+    // StatusBarCompat
+    compile ('com.github.niorgai:StatusBarCompat:2.1.4', {
+        exclude group: 'com.android.support'
+    })
 
 }

@@ -69,10 +69,11 @@ public class WeatherActivity extends AppCompatActivity {
 
     private String mWeatherId;
 
+    private Intent intent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
 
         if (Build.VERSION.SDK_INT >= 21) { // 只有版本号大于等于21（Android 5.0）才执行后面代码
@@ -84,7 +85,10 @@ public class WeatherActivity extends AppCompatActivity {
             // 设置状态栏是透明
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
             getWindow().setStatusBarColor(Color.TRANSPARENT);
+
         }
+        //        StatusBarCompat.translucentStatusBar(this);//沉浸式状态栏
+
 
         setContentView(R.layout.activity_weather);
         initView();
@@ -101,7 +105,6 @@ public class WeatherActivity extends AppCompatActivity {
             weatherLayout.setVisibility(View.INVISIBLE);
             requestWeather(mWeatherId);
         }
-
         refreshListener();
         SlidingMenuListener(prefs);
         swipeRefresh.setRefreshing(true);
@@ -141,6 +144,7 @@ public class WeatherActivity extends AppCompatActivity {
         }
     }
 
+
     private void initView() {
         // 初始化各控件
         bingPicImg = (ImageView) findViewById(R.id.bing_pic_img);
@@ -166,8 +170,8 @@ public class WeatherActivity extends AppCompatActivity {
      */
     public void requestWeather(final String weatherId) {
         String weatherUrl = "http://guolin.tech/api/weather?cityid=" + weatherId + "&key=054d3f0c518e49388b0f43f6ea547d53";
-//      String weatherUrl = "https://free-api.heweather.com/v5/weather?city=" + weatherId + "&key=054d3f0c518e49388b0f43f6ea547d53";
-        Log.i("weatherUrl", "requestWeather: "+weatherUrl);
+        //      String weatherUrl = "https://free-api.heweather.com/v5/weather?city=" + weatherId + "&key=054d3f0c518e49388b0f43f6ea547d53";
+        Log.i("weatherUrl", "requestWeather: " + weatherUrl);
         HttpUtil.sendOkHttpRequest(weatherUrl, new Callback() {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
@@ -268,7 +272,11 @@ public class WeatherActivity extends AppCompatActivity {
         carWashText.setText(carWash);
         sportText.setText(sport);
         weatherLayout.setVisibility(View.VISIBLE);
-        Intent intent = new Intent(this, AutoUpdateService.class);
+        intent = new Intent(this, AutoUpdateService.class);
+
+        intent.putExtra("cityName", cityName);
+        intent.putExtra("degree", degree);
+        intent.putExtra("weatherInfo", weatherInfo);
         startService(intent);
     }
 }

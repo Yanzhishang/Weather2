@@ -1,9 +1,10 @@
-package com.yzs.weather2;
+package com.yzs.weather2.fragment;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.yzs.weather2.R;
+import com.yzs.weather2.activity.MainActivity;
+import com.yzs.weather2.activity.WeatherActivity;
 import com.yzs.weather2.db.City;
 import com.yzs.weather2.db.County;
 import com.yzs.weather2.db.Province;
@@ -112,9 +116,9 @@ public class ChooseAreaFragment extends Fragment {
                         getActivity().finish();
                     } else if (getActivity() instanceof WeatherActivity) { // 判断是否碎片是否从属 WeatherActivity
                         WeatherActivity activity = (WeatherActivity) getActivity();
-                        activity.drawerLayout.closeDrawers();
-                        activity.swipeRefresh.setRefreshing(true);
-                        activity.requestWeather(weatherId);
+                        activity.drawerLayout.closeDrawers(); // 关闭侧滑菜单
+                        activity.swipeRefresh.setRefreshing(true);//显示下拉刷新进度条
+                        activity.requestWeather(weatherId);//请求城市天气
                     }
                 }
             }
@@ -134,14 +138,6 @@ public class ChooseAreaFragment extends Fragment {
     }
 
     /**
-     * 设置设配器
-     */
-    private void setChooseAreAdapter() {
-        adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, dataList);
-        listView.setAdapter(adapter);
-    }
-
-    /**
      * 初始化控件
      *
      * @param view
@@ -150,6 +146,14 @@ public class ChooseAreaFragment extends Fragment {
         titleText = view.findViewById(R.id.title_text);
         backButton = view.findViewById(R.id.back_button);
         listView = view.findViewById(R.id.list_view);
+    }
+
+    /**
+     * 设置设配器
+     */
+    private void setChooseAreAdapter() {
+        adapter = new ArrayAdapter<>(getContext(), R.layout.list_item, dataList);
+        listView.setAdapter(adapter);
     }
 
     /**
@@ -169,6 +173,7 @@ public class ChooseAreaFragment extends Fragment {
             currentLevel = LEVEL_PROVINCE;
         } else {
             String address = "http://guolin.tech/api/china";
+            Log.i("address", "queryProvinces**////////address: "+address);
             queryFromServer(address, "province");
         }
     }
@@ -191,6 +196,7 @@ public class ChooseAreaFragment extends Fragment {
         } else {
             int provinceCode = selectedProvince.getProvinceCode();
             String address = "http://guolin.tech/api/china/" + provinceCode;
+            Log.i("address", "queryCities*******address: "+address);
             queryFromServer(address, "city");
         }
     }
@@ -214,6 +220,7 @@ public class ChooseAreaFragment extends Fragment {
             int provinceCode = selectedProvince.getProvinceCode();
             int cityCode = selectedCity.getCityCode();
             String address = "http://guolin.tech/api/china/" + provinceCode + "/" + cityCode;
+            Log.i("address", "queryCounties---address: "+address);
             queryFromServer(address, "county");
         }
     }

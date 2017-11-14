@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
+    android:id="@+id/fl_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.yzs.weather2.MainActivity">
+    tools:context="com.yzs.weather2.activity.MainActivity">
+
     <fragment
-        android:id="@+id/choose_area_fragment"
-        android:name="com.yzs.weather2.ChooseAreaFragment"
+        android:id="@+id/main_fragment"
+        android:name="com.yzs.weather2.fragment.ChooseAreaFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </FrameLayout>

@@ -5,14 +5,17 @@
     android:layout_height="?attr/actionBarSize">
 
     <!--打开侧滑-->
-    <Button
+    <com.joanzapata.iconify.widget.IconButton
         android:id="@+id/nav_button"
         android:layout_width="30dp"
+        android:background="@android:color/transparent"
+        android:textColor="#fff"
+        android:textSize="32sp"
+        android:text="{ion-navicon-round}"
         android:layout_height="30dp"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="10dp"
-        android:background="@mipmap/ic_home"/>
+        android:layout_marginLeft="10dp"/>
     <!--地区-->
     <TextView
         android:id="@+id/title_city"
@@ -20,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:textColor="#fff"
-        android:textSize="20sp"/>
+        android:textSize="23sp"/>
     <!--更新的时间-->
     <TextView
         android:id="@+id/title_update_time"
@@ -30,6 +33,6 @@
         android:layout_centerVertical="true"
         android:layout_marginRight="10dp"
         android:textColor="#fff"
-        android:textSize="16sp"/>
+        android:textSize="18sp"/>
 
 </RelativeLayout>

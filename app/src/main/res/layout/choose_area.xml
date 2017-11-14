@@ -10,7 +10,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary">
+        android:background="@drawable/title">
 
         <TextView
             android:id="@+id/title_text"
@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:textColor="#fff"
-            android:textSize="20sp"/>
+            android:textSize="23sp"/>
 
         <Button
             android:id="@+id/back_button"
@@ -31,8 +31,10 @@
     </RelativeLayout>
 
     <ListView
+        android:background="@drawable/hallstatt2"
         android:id="@+id/list_view"
         android:layout_width="match_parent"
+        android:paddingLeft="20dp"
         android:layout_height="match_parent"/>
 
 </LinearLayout>
